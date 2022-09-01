@@ -1,4 +1,3 @@
-
 kind: Deployment
 apiVersion: apps/v1
 metadata:
@@ -16,26 +15,26 @@ spec:
         app: vprodb
     spec:
       containers:
-      - name: vprodb
-        image: aidiko20/vprofiledb:V1
-        args:
-          - "ignore-db-dir=lost+found"
-        volumeMounts:
-          - mountPath: /var/lib/mysql
-            name: vpro-db-data
-        ports:
-        - name: vprodb-port
-          containerPort: 3306
-        env:
-        - name: MYSQL_ROOT_PASS
-        valueFrom:
-        secretKeyRef:
-          name: app-secret
-          key: db-pass
+        - name: vprodb
+          image: aidiko20/vprofiledb:V1
+          args:
+            - "ignore-db-dir=lost+found"
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: vpro-db-data
+          ports:
+            - name: vprodb-port
+              containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                name: app-secret
+                key: db-pass
       nodeSelector:
         zone: us-east-1a
       volumes:
         - name: vpro-db-data
           awsElasticBlockStore:
-          volumeID: vol-03b78cf01426ed105
-          fstype: ext4
+            volumeID: vol-03b78cf01426ed105
+            fsType: ext4
