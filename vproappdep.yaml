@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: vproapp
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: vproapp
@@ -20,7 +21,7 @@ spec:
       initContainers:
         - name: init-mydb
           image: busybox
-          command: ['sh', '-c', 'untill nslookup vprodb; do echo waiting for mydb; sleep 2; done;']
+          command: ['sh', '-c', 'untill nslookup vprodb; do echo waiting for mydb; sleep 20; done']
         - name: init-memcache
           image: busybox
-          command: ['sh', '-c', 'untill nslookup vprodb; do echo waiting for mydb; sleep 2; done;']          
+          command: ['sh', '-c', 'untill nslookup vprodb; do echo waiting for memcache; sleep 20; done']          
