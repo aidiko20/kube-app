@@ -11,10 +11,10 @@ spec:
     metadata:
       labels:
         app: vpromc
-  spec:
-    containers:
-      - name: vpromc
-        image: memcached
-        ports:
-        - name: vpro-port
-          containerPort: 11211
+    spec:
+      containers:
+        - name: vpromc
+          image: memcached
+          ports:
+            - name: vpro-port
+              containerPort: 11211
